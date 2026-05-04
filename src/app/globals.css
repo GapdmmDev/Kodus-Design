@@ -121,6 +121,24 @@ body {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Service row arrow animation
+   ────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 980px) {
+  .svc-arrow {
+    opacity: 0;
+    transform: translateX(2rem);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  .svc-row:hover .svc-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@media (max-width: 979px) {
+  .svc-arrow { opacity: 0.5; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    Reveal on scroll
    ────────────────────────────────────────────────────────────────────────── */
 .reveal {

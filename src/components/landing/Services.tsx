@@ -35,7 +35,7 @@ export function Services() {
               ))}
             </h2>
 
-            <p className="font-mono max-w-[280px] text-[13px] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none">
+            <p className="font-mono max-w-[280px] text-[11px] uppercase tracking-[.06em] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none">
               {services.meta}
             </p>
           </div>
@@ -47,7 +47,7 @@ export function Services() {
                 key={item.idx}
                 href="#contato"
                 aria-label={`${item.name}${item.em} — ir para contato`}
-                className="group relative flex items-center border-b border-[var(--line)] py-9 max-[980px]:py-7 max-[600px]:py-6"
+                className="svc-row group relative flex items-center border-b border-[var(--line)] py-9 max-[980px]:py-7 max-[600px]:py-6"
               >
                 {/* Hover gradient background */}
                 <div
@@ -91,19 +91,11 @@ export function Services() {
                   </span>
                 </div>
 
-                {/* Arrow — orange, slides in from right on desktop */}
+                {/* Arrow — animated via .svc-arrow CSS class */}
                 <ArrowUpRight
                   size={28}
                   aria-hidden="true"
-                  className={cn(
-                    "relative shrink-0 text-[var(--accent)]",
-                    "transition-all duration-300 ease-out",
-                    // Desktop: off-screen right → slides to position on hover
-                    "min-[980px]:translate-x-8 min-[980px]:opacity-0",
-                    "min-[980px]:group-hover:translate-x-0 min-[980px]:group-hover:opacity-100",
-                    // Mobile: always visible at half opacity
-                    "max-[980px]:opacity-50",
-                  )}
+                  className="svc-arrow relative shrink-0 text-[var(--accent)]"
                 />
               </a>
             ))}

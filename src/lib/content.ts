@@ -75,12 +75,12 @@ export interface ServicesData {
 
 export interface ManifestoItem {
   num: string;
-  title: string;
+  title: TitleSegment[];
   body: string;
 }
 
 export interface ManifestoData {
-  heading: string;
+  heading: TitleSegment[];
   meta: string;
   items: ManifestoItem[];
 }
@@ -247,22 +247,34 @@ export const services: ServicesData = {
 };
 
 export const manifesto: ManifestoData = {
-  heading: "Como a gente pensa.",
+  heading: [
+    { text: "Como a gente " },
+    { text: "pensa.", italic: true, accent: true },
+  ],
   meta: "Os princípios que guiam cada decisão de design e código.",
   items: [
     {
       num: "01 —",
-      title: "Minimalista, não vazio",
+      title: [
+        { text: "Minimalista,", accent: true },
+        { text: " não vazio" },
+      ],
       body: "Cada elemento existe com propósito. Removemos tudo que não guia, não converte, não vende. Design por subtração.",
     },
     {
       num: "02 —",
-      title: "Rápido como deve ser",
+      title: [
+        { text: "Rápido", accent: true },
+        { text: " como deve ser" },
+      ],
       body: "LCP abaixo de 1,5s não é bônus — é requisito. Site lento perde venda antes do visitante terminar de carregar a página.",
     },
     {
       num: "03 —",
-      title: "Profissional, sem ser chato",
+      title: [
+        { text: "Profissional,", accent: true },
+        { text: " sem ser chato" },
+      ],
       body: "Seriedade e personalidade não se excluem. Fazemos sites que a pessoa se orgulha de mostrar.",
     },
   ],
