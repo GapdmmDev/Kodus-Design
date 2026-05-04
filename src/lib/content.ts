@@ -156,7 +156,7 @@ export const hero: HeroData = {
   meta: [
     { text: "Kodus / Estúdio Digital" },
     { text: "Aceitando 2 projetos · Mai/Jun 2026", live: true },
-    { text: "São Paulo, BR · 2026" },
+    { text: "São Paulo, BR" },
   ],
   title: [
     [{ text: "Sites que" }],
@@ -171,7 +171,7 @@ export const hero: HeroData = {
     { label: "Começar projeto", href: "#contato", variant: "primary" },
     { label: "Ver trabalhos", href: "#trabalhos", variant: "ghost" },
   ],
-  trust: "+40 marcas confiaram · NPS 92",
+  trust: "+40 marcas confiaram",
   stats: [
     { value: "+312%", label: "conversão média / cliente" },
     { value: "21 dias", label: "prazo médio de entrega" },

@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -145,34 +144,23 @@ export function HeroSplit() {
           className={cn(
             "mb-10 flex items-center",
             "font-mono text-[11px] uppercase tracking-[.08em] text-[var(--fg-mute)]",
-            // Desktop: horizontal row with gap
-            "gap-4",
+            // Desktop: left / center / right
+            "min-[980px]:justify-between",
             // Mobile: vertical stack
             "max-[980px]:flex-col max-[980px]:items-start max-[980px]:gap-2",
           )}
         >
           {hero.meta.map((item, i) => (
-            <Fragment key={i}>
-              {/* Bullet separator — desktop only, between items */}
-              {i > 0 && (
-                <span
-                  className="hidden min-[980px]:block"
-                  aria-hidden="true"
-                >
-                  ·
-                </span>
+            <span
+              key={i}
+              className={cn(
+                "flex items-center gap-2",
+                i === 1 && "max-[480px]:hidden",
               )}
-              <span
-                className={cn(
-                  "flex items-center gap-2",
-                  // Hide middle item on very small screens
-                  i === 1 && "max-[480px]:hidden",
-                )}
-              >
-                {item.live && <LiveDot />}
-                {item.text}
-              </span>
-            </Fragment>
+            >
+              {item.live && <LiveDot />}
+              {item.text}
+            </span>
           ))}
         </div>
 
