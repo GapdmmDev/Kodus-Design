@@ -1,0 +1,151 @@
+/* globals.css — Kodus Landing (Tailwind v4) */
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Theme tokens (Tailwind v4 @theme)
+   ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --color-bg: #0a0a0a;
+  --color-bg-2: #111111;
+  --color-fg: #f4f1ea;
+  --color-fg-dim: #a8a39a;
+  --color-fg-mute: #6b665d;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.16);
+  --color-card: #131313;
+  --color-card-2: #181818;
+  --color-accent: #ff5b1f;
+  --color-accent-soft: rgba(255, 91, 31, 0.14);
+
+  --radius-pill: 999px;
+  --radius-card: 16px;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Base CSS variables (sourced from @theme; light overrides via .light below)
+   ────────────────────────────────────────────────────────────────────────── */
+:root {
+  --bg: #0a0a0a;
+  --bg-2: #111111;
+  --fg: #f4f1ea;
+  --fg-dim: #a8a39a;
+  --fg-mute: #6b665d;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --card: #131313;
+  --card-2: #181818;
+  --accent: #ff5b1f;
+  --accent-soft: rgba(255, 91, 31, 0.14);
+}
+
+/* next-themes uses class="dark" or class="light" on <html>.
+   We default to dark; add .light to override. */
+.light {
+  --bg: #f4f1ea;
+  --bg-2: #ebe7dd;
+  --fg: #131210;
+  --fg-dim: #5c5851;
+  --fg-mute: #8a857c;
+  --line: rgba(19, 18, 16, 0.10);
+  --line-strong: rgba(19, 18, 16, 0.22);
+  --card: #ffffff;
+  --card-2: #f9f6ef;
+  --accent: #e84a0d;
+  --accent-soft: rgba(232, 74, 13, 0.10);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Reusable utility classes
+   ────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .display {
+    font-family: var(--font-display), serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+  .display em { font-style: italic; color: var(--accent); }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Reveal on scroll (use with framer-motion or IntersectionObserver)
+   ────────────────────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Pulse (live indicator)
+   ────────────────────────────────────────────────────────────────────────── */
+@keyframes pulse {
+  50% { opacity: 0.5; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Safe areas (iOS notch)
+   ────────────────────────────────────────────────────────────────────────── */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
