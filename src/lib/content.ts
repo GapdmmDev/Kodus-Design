@@ -79,6 +79,12 @@ export interface ManifestoItem {
   body: string;
 }
 
+export interface ManifestoData {
+  heading: string;
+  meta: string;
+  items: ManifestoItem[];
+}
+
 export interface ProcessStep {
   num: string;
   title: string;
@@ -240,23 +246,27 @@ export const services: ServicesData = {
   ],
 };
 
-export const manifesto: ManifestoItem[] = [
-  {
-    num: "01 —",
-    title: "Minimalista, não vazio",
-    body: "Cada elemento existe com propósito. Removemos tudo que não guia, não converte, não vende. Design por subtração.",
-  },
-  {
-    num: "02 —",
-    title: "Rápido como deve ser",
-    body: "LCP abaixo de 1,5s não é bônus — é requisito. Site lento perde venda antes do visitante terminar de carregar a página.",
-  },
-  {
-    num: "03 —",
-    title: "Profissional, sem ser chato",
-    body: "Seriedade e personalidade não se excluem. Fazemos sites que a pessoa se orgulha de mostrar.",
-  },
-];
+export const manifesto: ManifestoData = {
+  heading: "Como a gente pensa.",
+  meta: "Os princípios que guiam cada decisão de design e código.",
+  items: [
+    {
+      num: "01 —",
+      title: "Minimalista, não vazio",
+      body: "Cada elemento existe com propósito. Removemos tudo que não guia, não converte, não vende. Design por subtração.",
+    },
+    {
+      num: "02 —",
+      title: "Rápido como deve ser",
+      body: "LCP abaixo de 1,5s não é bônus — é requisito. Site lento perde venda antes do visitante terminar de carregar a página.",
+    },
+    {
+      num: "03 —",
+      title: "Profissional, sem ser chato",
+      body: "Seriedade e personalidade não se excluem. Fazemos sites que a pessoa se orgulha de mostrar.",
+    },
+  ],
+};
 
 export const process: ProcessStep[] = [
   {

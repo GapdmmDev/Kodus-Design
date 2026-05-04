@@ -13,7 +13,7 @@ export function Services() {
       <Container>
         <Reveal>
           {/* ── Section header ─────────────────────────────────────── */}
-          <div className="mb-16 flex items-start justify-between gap-8 max-[980px]:mb-10 max-[980px]:flex-col">
+          <div className="mb-16 flex items-center justify-between gap-8 max-[980px]:mb-10 max-[980px]:flex-col max-[980px]:items-start">
             <h2
               className="display shrink-0 leading-[.92] tracking-[-0.025em] text-[clamp(40px,6vw,96px)]"
             >
@@ -35,7 +35,7 @@ export function Services() {
               ))}
             </h2>
 
-            <p className="max-w-[280px] text-[15px] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none">
+            <p className="font-mono max-w-[280px] text-[13px] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none">
               {services.meta}
             </p>
           </div>
@@ -91,15 +91,15 @@ export function Services() {
                   </span>
                 </div>
 
-                {/* Arrow */}
+                {/* Arrow — orange, slides in from right on desktop */}
                 <ArrowUpRight
                   size={28}
                   aria-hidden="true"
                   className={cn(
-                    "relative shrink-0 text-[var(--fg-dim)]",
-                    "transition-all duration-200",
-                    // Desktop: hidden at rest, slides in on hover
-                    "min-[980px]:translate-x-3 min-[980px]:opacity-0",
+                    "relative shrink-0 text-[var(--accent)]",
+                    "transition-all duration-300 ease-out",
+                    // Desktop: off-screen right → slides to position on hover
+                    "min-[980px]:translate-x-8 min-[980px]:opacity-0",
                     "min-[980px]:group-hover:translate-x-0 min-[980px]:group-hover:opacity-100",
                     // Mobile: always visible at half opacity
                     "max-[980px]:opacity-50",
