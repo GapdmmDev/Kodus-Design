@@ -34,8 +34,15 @@ export interface HeroStat {
   label: string;
 }
 
+export interface HeroMetaItem {
+  text: string;
+  /** Renders a green pulsing dot before the text */
+  live?: boolean;
+}
+
 export interface HeroData {
-  eyebrow: string;
+  /** 3 spans: studio / availability (live dot) / location */
+  meta: HeroMetaItem[];
   /** Array of lines; each line is an array of segments */
   title: TitleSegment[][];
   sub: string;
@@ -146,7 +153,11 @@ export const nav: NavData = {
 };
 
 export const hero: HeroData = {
-  eyebrow: "Estúdio Digital · São Paulo · 2026",
+  meta: [
+    { text: "Kodus / Estúdio Digital" },
+    { text: "Aceitando 2 projetos · Mai/Jun 2026", live: true },
+    { text: "São Paulo, BR · 2026" },
+  ],
   title: [
     [{ text: "Sites que" }],
     [
