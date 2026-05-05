@@ -341,6 +341,18 @@ export const work: WorkCase[] = [
   },
 ];
 
+export const processSection = {
+  headingTop: [
+    { text: "Processo " },
+    { text: "direto.", italic: true, accent: true },
+  ] as TitleSegment[],
+  headingBottom: "Sem floreio.",
+};
+
+export const workSection = {
+  heading: "Trabalhos recentes.",
+};
+
 export const testimonial: TestimonialData = {
   eyebrow: "Resultados reais",
   quote: [

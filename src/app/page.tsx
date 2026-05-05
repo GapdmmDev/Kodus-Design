@@ -3,6 +3,7 @@ import { HeroSplit } from "@/components/landing/HeroSplit";
 import { Services } from "@/components/landing/Services";
 import { Manifesto } from "@/components/landing/Manifesto";
 import { Process } from "@/components/landing/Process";
+import { Work } from "@/components/landing/Work";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Services />
         <Manifesto />
         <Process />
+        <Work />
       </main>
     </>
   );
