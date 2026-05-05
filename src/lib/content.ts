@@ -374,7 +374,7 @@ export const testimonial: TestimonialData = {
 };
 
 export const faq: FAQData = {
-  eyebrow: "Dúvidas frequentes",
+  eyebrow: "Perguntas frequentes",
   heading: [
     { text: "O que " },
     { text: "todo cliente", italic: true, accent: true },

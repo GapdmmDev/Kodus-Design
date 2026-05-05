@@ -21,17 +21,21 @@ export function FAQ() {
               <Eyebrow>{faq.eyebrow}</Eyebrow>
 
               <h2
-                className="display leading-[1.05] tracking-[-0.02em] text-[clamp(32px,4vw,56px)]"
+                className="display leading-[1.05] tracking-[-0.02em] text-[clamp(38px,5vw,68px)]"
               >
-                {faq.heading.map((seg, i) =>
-                  seg.accent ? (
-                    <em key={i} style={{ fontStyle: "italic", color: "var(--accent)" }}>
-                      {seg.text}
-                    </em>
-                  ) : (
-                    <span key={i}>{seg.text}</span>
-                  )
-                )}
+                {faq.heading.map((seg, i) => (
+                  <span key={i}>
+                    {seg.accent ? (
+                      <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+                        {seg.text}
+                      </em>
+                    ) : (
+                      <span>{seg.text}</span>
+                    )}
+                    {/* Line break after "todo cliente" → puts "pergunta antes." on its own line */}
+                    {seg.accent && <br />}
+                  </span>
+                ))}
               </h2>
             </div>
 
@@ -61,7 +65,7 @@ export function FAQ() {
                     </span>
 
                     <span
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--line)] text-[var(--accent)] transition-transform duration-300 group-data-[state=open]:rotate-45"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--accent)] transition-transform duration-300 group-data-[state=open]:rotate-45"
                       aria-hidden="true"
                     >
                       <Plus size={18} />
