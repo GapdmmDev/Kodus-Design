@@ -4,6 +4,7 @@ import { Services } from "@/components/landing/Services";
 import { Manifesto } from "@/components/landing/Manifesto";
 import { Process } from "@/components/landing/Process";
 import { Work } from "@/components/landing/Work";
+import { Testimonial } from "@/components/landing/Testimonial";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Manifesto />
         <Process />
         <Work />
+        <Testimonial />
       </main>
     </>
   );

@@ -71,7 +71,7 @@ export function Process() {
 
             {/* ── Bottom heading: "Sem floreio." right-aligned ────────── */}
             <p
-              className="display mt-8 text-right italic leading-[.92] tracking-[-0.025em] text-[clamp(36px,5vw,80px)] text-[var(--fg-dim)]"
+              className="display mt-8 text-right italic leading-[.92] tracking-[-0.025em] text-[clamp(36px,5vw,80px)] text-[var(--fg)]"
               aria-hidden="true"
             >
               {processSection.headingBottom}

@@ -7,16 +7,11 @@ import type { WorkCase } from "@/lib/content";
 
 // ── Per-case gradient palettes ─────────────────────────────────────────────
 const GRADIENTS: Record<string, string> = {
-  "orion-capital":
-    "linear-gradient(135deg, #0f1b3d 0%, #132250 50%, #1a3070 100%)",
-  "helix-studio":
-    "linear-gradient(135deg, #1a0a2e 0%, #2d1547 50%, #421d66 100%)",
-  "verde":
-    "linear-gradient(135deg, #0a1e12 0%, #0d2918 50%, #0f3820 100%)",
-  "drumond-atelier":
-    "linear-gradient(135deg, #1e1206 0%, #2b1b08 50%, #3d2a0d 100%)",
-  "pulso-logistica":
-    "linear-gradient(135deg, #0d0d0d 0%, #141414 50%, #1a1a1a 100%)",
+  "orion-capital":   "linear-gradient(135deg, #0f1b3d 0%, #132250 50%, #1a3070 100%)",
+  "helix-studio":    "linear-gradient(135deg, #1a0a2e 0%, #2d1547 50%, #421d66 100%)",
+  "verde":           "linear-gradient(135deg, #0a1e12 0%, #0d2918 50%, #0f3820 100%)",
+  "drumond-atelier": "linear-gradient(135deg, #1e1206 0%, #2b1b08 50%, #3d2a0d 100%)",
+  "pulso-logistica": "linear-gradient(135deg, #0d0d0d 0%, #141414 50%, #1a1a1a 100%)",
 };
 
 // ── WorkCard ───────────────────────────────────────────────────────────────
@@ -25,14 +20,7 @@ function WorkCard({ item }: { item: WorkCase }) {
   return (
     <article className="flex flex-col gap-3">
       {/* Thumb */}
-      <div
-        className={cn(
-          "group relative overflow-hidden rounded-[16px] border border-[var(--line-strong)]",
-          item.featured
-            ? "aspect-[4/3] min-[980px]:aspect-auto min-[980px]:h-full"
-            : "aspect-[16/10]",
-        )}
-      >
+      <div className="group relative aspect-[16/10] overflow-hidden rounded-[16px] border border-[var(--line-strong)]">
         {/* Gradient base */}
         <div
           className="absolute inset-0"
@@ -52,12 +40,10 @@ function WorkCard({ item }: { item: WorkCase }) {
 
         {/* Tags row */}
         <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-2">
-          {/* Placeholder tag */}
           <span className="rounded-[6px] bg-black/50 px-2 py-1 font-mono text-[10px] uppercase tracking-[.06em] text-[var(--fg-mute)] backdrop-blur-sm">
             Estudo de caso
           </span>
 
-          {/* Live tag — only on featured */}
           {item.featured && (
             <span className="flex items-center gap-1.5 rounded-full bg-black/50 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[.06em] text-[var(--fg)] backdrop-blur-sm">
               <span
@@ -71,10 +57,10 @@ function WorkCard({ item }: { item: WorkCase }) {
         </div>
 
         {/* Mock heading — centered */}
-        <div className="absolute inset-0 flex items-center justify-center p-6 max-[600px]:p-4">
+        <div className="absolute inset-0 flex items-center justify-center p-6">
           <p
             className="display italic text-center text-[var(--fg)]"
-            style={{ fontSize: "clamp(14px, 2.2vw, 24px)" }}
+            style={{ fontSize: "clamp(16px, 2.4vw, 26px)" }}
           >
             {item.mockHeading}
           </p>
@@ -111,9 +97,6 @@ function WorkCard({ item }: { item: WorkCase }) {
 // ── Section ────────────────────────────────────────────────────────────────
 
 export function Work() {
-  const featured = work.find((c) => c.featured)!;
-  const rest = work.filter((c) => !c.featured);
-
   return (
     <section
       id="trabalhos"
@@ -121,22 +104,15 @@ export function Work() {
     >
       <Container>
         <Reveal>
-          {/* Section header */}
           <div className="mb-12 max-[980px]:mb-8">
             <h2 className="display leading-[.92] tracking-[-0.025em] text-[clamp(40px,6vw,96px)]">
               {workSection.heading}
             </h2>
           </div>
 
-          {/* Grid — featured card spans 2 rows on desktop */}
-          <div className="grid grid-cols-1 gap-6 min-[980px]:grid-cols-[1.4fr_1fr]">
-            {/* Featured card — col 1, row span 2 */}
-            <div className="min-[980px]:row-span-2">
-              <WorkCard item={featured} />
-            </div>
-
-            {/* Remaining 4 cards — col 2 on desktop, continue in 1 col on mobile */}
-            {rest.map((item) => (
+          {/* Equal 2-column grid */}
+          <div className="grid grid-cols-1 gap-6 min-[980px]:grid-cols-2">
+            {work.map((item) => (
               <WorkCard key={item.slug} item={item} />
             ))}
           </div>
