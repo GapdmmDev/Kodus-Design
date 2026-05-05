@@ -172,11 +172,11 @@ export function HeroSplit() {
               className={cn(
                 "display leading-[.92] tracking-[-0.025em]",
                 // Mobile clamp → desktop clamp
-                "text-[clamp(52px,13.5vw,80px)] min-[980px]:text-[clamp(56px,7vw,108px)]",
+                "text-[clamp(44px,calc((100vw_-_40px)_/_5.5),100px)] min-[980px]:text-[clamp(56px,7vw,108px)]",
               )}
             >
               {hero.title.map((line, li) => (
-                <span key={li} className="block">
+                <span key={li} className="block whitespace-nowrap">
                   {renderSegments(line)}
                 </span>
               ))}

@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { LogoMark } from "@/components/ui/logo";
@@ -117,79 +118,84 @@ export function Nav() {
         </Container>
       </header>
 
-      {/* ── Mobile drawer — CSS transition, no Framer Motion ───────────── */}
-      <div
-        id="mobile-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu de navegação"
-        aria-hidden={!open}
-        className={cn(
-          "fixed inset-0 z-[60] flex flex-col bg-[var(--bg)]",
-          "px-8 pb-[max(32px,env(safe-area-inset-bottom))]",
-          "pt-[max(24px,env(safe-area-inset-top))]",
-          // CSS-only fade — visibility:hidden prevents tab focus when closed
-          "transition-[opacity,visibility] duration-[220ms] [transition-timing-function:cubic-bezier(0.32,0.72,0,1)]",
-          open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none",
+      {/* ── Mobile drawer — Framer Motion slide from top ───────────────── */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-drawer"
+            id="mobile-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu de navegação"
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+            className={cn(
+              "fixed inset-0 z-[60] flex flex-col bg-[var(--bg)]",
+              "px-8 pb-[max(32px,env(safe-area-inset-bottom))]",
+              "pt-[max(24px,env(safe-area-inset-top))]",
+            )}
+          >
+            {/* Drawer header */}
+            <div className="flex h-14 items-center justify-between">
+              <Logo onClick={close} />
+
+              <button
+                className={cn(
+                  "flex h-11 w-11 items-center justify-center rounded-full",
+                  "border border-[var(--line)] text-[var(--fg-dim)]",
+                  "transition-colors duration-150 hover:border-[var(--line-strong)] hover:text-[var(--fg)]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
+                )}
+                onClick={close}
+                aria-label="Fechar menu"
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Drawer links */}
+            <nav aria-label="Menu mobile" className="mt-10 flex flex-col gap-6">
+              {nav.links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={close}
+                  className={cn(
+                    "display block italic leading-tight text-[32px] text-[var(--fg)]",
+                    "transition-colors duration-150 hover:text-[var(--accent)]",
+                    "py-1",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Drawer CTA — pinned to bottom */}
+            <div className="mt-auto pt-8">
+              <Link
+                href={nav.cta.href}
+                onClick={close}
+                className={cn(
+                  "group inline-flex h-12 items-center gap-2 rounded-full px-6",
+                  "bg-[var(--accent)] text-sm font-medium text-white",
+                  "transition-colors duration-200 hover:opacity-90",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
+                )}
+              >
+                {nav.cta.label}
+                <ArrowUpRight
+                  size={14}
+                  className="shrink-0 transition-transform duration-150 group-hover:translate-x-px group-hover:-translate-y-px"
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
+          </motion.div>
         )}
-      >
-        {/* Drawer header */}
-        <div className="flex h-14 items-center justify-between">
-          <Logo onClick={close} />
-
-          <button
-            className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-full",
-              "border border-[var(--line)] text-[var(--fg-dim)]",
-              "transition-colors duration-150 hover:border-[var(--line-strong)] hover:text-[var(--fg)]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
-            )}
-            onClick={close}
-            aria-label="Fechar menu"
-          >
-            <X size={20} aria-hidden="true" />
-          </button>
-        </div>
-
-        {/* Drawer links */}
-        <nav aria-label="Menu mobile" className="mt-10 flex flex-col gap-6">
-          {nav.links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={close}
-              className={cn(
-                "display block italic leading-tight text-[32px] text-[var(--fg)]",
-                "transition-colors duration-150 hover:text-[var(--accent)]",
-                "py-1",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Drawer CTA — pinned to bottom */}
-        <div className="mt-auto pt-8">
-          <Link
-            href={nav.cta.href}
-            onClick={close}
-            className={cn(
-              "group inline-flex h-12 items-center gap-2 rounded-full px-6",
-              "bg-[var(--accent)] text-sm font-medium text-white",
-              "transition-colors duration-200 hover:opacity-90",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
-            )}
-          >
-            {nav.cta.label}
-            <ArrowUpRight
-              size={14}
-              className="shrink-0 transition-transform duration-150 group-hover:translate-x-px group-hover:-translate-y-px"
-              aria-hidden="true"
-            />
-          </Link>
-        </div>
-      </div>
+      </AnimatePresence>
     </>
   );
 }

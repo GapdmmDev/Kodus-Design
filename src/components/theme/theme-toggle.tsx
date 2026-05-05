@@ -16,7 +16,11 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       suppressHydrationWarning
       aria-label="Alternar tema"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => {
+        document.documentElement.classList.add("theme-transition");
+        setTheme(isDark ? "light" : "dark");
+        window.setTimeout(() => document.documentElement.classList.remove("theme-transition"), 300);
+      }}
       className={cn(
         "flex h-10 w-10 items-center justify-center rounded-full",
         "border border-[var(--line)] text-[var(--fg-dim)]",

@@ -1,6 +1,7 @@
 "use client";
-import * as Accordion from "@radix-ui/react-accordion";
+import { useState } from "react";
 import { Plus } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
@@ -8,6 +9,8 @@ import { faq } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
 export function FAQ() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
   return (
     <section
       id="faq"
@@ -32,7 +35,6 @@ export function FAQ() {
                     ) : (
                       <span>{seg.text}</span>
                     )}
-                    {/* Line break after "todo cliente" → puts "pergunta antes." on its own line */}
                     {seg.accent && <br />}
                   </span>
                 ))}
@@ -40,49 +42,55 @@ export function FAQ() {
             </div>
 
             {/* ── Right — accordion ───────────────────────────────────── */}
-            <Accordion.Root
-              type="single"
-              collapsible
-              className="border-t border-[var(--line)]"
-            >
-              {faq.items.map((item, i) => (
-                <Accordion.Item
-                  key={i}
-                  value={`item-${i}`}
-                  className="border-b border-[var(--line)]"
-                >
-                  {/* Trigger */}
-                  <Accordion.Trigger
-                    className={cn(
-                      "group flex min-h-[56px] w-full items-center justify-between gap-4 py-5 text-left",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
-                    )}
-                  >
-                    <span
-                      className="display italic text-[clamp(18px,2vw,24px)] leading-snug text-[var(--fg)]"
+            <div className="border-t border-[var(--line)]">
+              {faq.items.map((item, i) => {
+                const isOpen = openIdx === i;
+                return (
+                  <div key={i} className="border-b border-[var(--line)]">
+                    <button
+                      onClick={() => setOpenIdx(isOpen ? null : i)}
+                      aria-expanded={isOpen}
+                      className={cn(
+                        "group flex min-h-[56px] w-full items-center justify-between gap-4 py-5 text-left",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
+                      )}
                     >
-                      {item.q}
-                    </span>
+                      <span className="display italic text-[clamp(18px,2vw,24px)] leading-snug text-[var(--fg)]">
+                        {item.q}
+                      </span>
 
-                    <span
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--accent)] transition-transform duration-300 group-data-[state=open]:rotate-45"
-                      aria-hidden="true"
-                    >
-                      <Plus size={18} />
-                    </span>
-                  </Accordion.Trigger>
+                      <span
+                        className={cn(
+                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--accent)]",
+                          "transition-transform duration-300",
+                          isOpen && "rotate-45",
+                        )}
+                        aria-hidden="true"
+                      >
+                        <Plus size={18} />
+                      </span>
+                    </button>
 
-                  {/* Content */}
-                  <Accordion.Content
-                    className="overflow-hidden data-[state=closed]:animate-[accordion-up_0.3s_ease-out] data-[state=open]:animate-[accordion-down_0.3s_ease-out]"
-                  >
-                    <p className="pb-6 text-[15px] leading-relaxed text-[var(--fg-dim)]">
-                      {item.a}
-                    </p>
-                  </Accordion.Content>
-                </Accordion.Item>
-              ))}
-            </Accordion.Root>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          <p className="pb-6 text-[15px] leading-relaxed text-[var(--fg-dim)]">
+                            {item.a}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Reveal>
       </Container>
