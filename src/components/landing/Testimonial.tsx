@@ -17,24 +17,16 @@ export function Testimonial() {
             <div className="flex flex-col gap-8">
               <Eyebrow>{testimonial.eyebrow}</Eyebrow>
 
-              {/* Quote */}
+              {/* Quote — opening and closing marks inline */}
               <blockquote>
-                {/* Decorative opening mark */}
-                <span
-                  className="display block leading-none text-[var(--fg-mute)]"
-                  style={{ fontSize: "clamp(60px, 8vw, 120px)", lineHeight: 0.8 }}
-                  aria-hidden="true"
-                >
-                  &#8220;
-                </span>
-
                 <p
                   className={cn(
-                    "display -mt-2 leading-[1.1] tracking-[-0.02em]",
+                    "display leading-[1.1] tracking-[-0.02em]",
                     "text-[clamp(28px,4vw,64px)] min-[980px]:text-[clamp(36px,5.4vw,84px)]",
                     "text-[var(--fg)]",
                   )}
                 >
+                  <span className="text-[var(--fg-mute)]">&#8220;</span>
                   {testimonial.quote.map((seg, i) =>
                     seg.accent ? (
                       <em key={i} style={{ fontStyle: "italic", color: "var(--accent)" }}>
@@ -44,21 +36,20 @@ export function Testimonial() {
                       <span key={i}>{seg.text}</span>
                     )
                   )}
+                  <span className="text-[var(--fg-mute)]">&#8221;</span>
                 </p>
               </blockquote>
 
               {/* Author */}
               <div className="flex items-center gap-4">
-                {/* Avatar placeholder */}
                 <div
                   className="h-11 w-11 shrink-0 rounded-full border-2 border-[var(--line-strong)]"
-                  style={{
-                    background: "linear-gradient(135deg, #6366f1 0%, #4338ca 100%)",
-                  }}
+                  style={{ background: "linear-gradient(135deg, #6366f1 0%, #4338ca 100%)" }}
                   aria-hidden="true"
                 />
                 <div className="flex flex-col gap-0.5">
-                  <span className="display italic text-[18px] leading-tight text-[var(--fg)]">
+                  {/* Geist sans, not display */}
+                  <span className="text-[17px] font-medium leading-tight text-[var(--fg)]">
                     {testimonial.author.name}
                   </span>
                   <span className="font-mono text-[11px] uppercase tracking-[.08em] text-[var(--fg-mute)]">

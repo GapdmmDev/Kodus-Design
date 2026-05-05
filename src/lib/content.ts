@@ -354,7 +354,7 @@ export const workSection = {
 };
 
 export const testimonial: TestimonialData = {
-  eyebrow: "Resultados reais",
+  eyebrow: "O que clientes dizem",
   quote: [
     { text: "Esperava 30 dias. Ficou no ar em " },
     { text: "22 dias", italic: true, accent: true },
