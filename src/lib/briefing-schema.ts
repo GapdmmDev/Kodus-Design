@@ -16,18 +16,18 @@ export const StepSchema1 = z.object({
 export const StepSchema2 = z.object({
   tipo: z.enum(
     ["landing", "institucional", "ecommerce", "sistema", "outro"],
-    { errorMap: () => ({ message: "Selecione o tipo de projeto" }) }
+    { error: "Selecione o tipo de projeto" }
   ),
 });
 
 export const StepSchema3 = z.object({
   orcamento: z.enum(
     ["ate5k", "5a10k", "10a20k", "acima20k", "naoseiorcamento"],
-    { errorMap: () => ({ message: "Selecione uma faixa de orçamento" }) }
+    { error: "Selecione uma faixa de orçamento" }
   ),
   prazo: z.enum(
     ["urgente", "1a2meses", "3maismeses", "flexivel"],
-    { errorMap: () => ({ message: "Selecione um prazo estimado" }) }
+    { error: "Selecione um prazo estimado" }
   ),
 });
 
