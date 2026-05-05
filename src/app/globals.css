@@ -70,10 +70,19 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
+  /* clip não cria scroll container nem afeta position:sticky — seguro no iOS Safari */
+  overflow-x: clip;
 }
 
-/* clip não cria scroll container — sticky e IntersectionObserver funcionam corretamente no iOS Safari */
-.layout-root { overflow-x: clip; }
+/* iOS Safari: sem touch-action os botões têm delay 300ms ou não respondem */
+button,
+[role="button"],
+[role="tab"],
+[role="radio"],
+[role="checkbox"] {
+  cursor: pointer;
+  touch-action: manipulation;
+}
 
 ::selection {
   background: var(--accent);

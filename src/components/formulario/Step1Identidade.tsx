@@ -2,11 +2,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
 function maskPhone(raw: string): string {
-  const d = raw.replace(/\D/g, "").slice(0, 11);
-  if (d.length === 0) return "";
-  if (d.length <= 2) return `(${d}`;
-  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  // Strip non-digits, limit to 11
+  const digits = raw.replace(/\D/g, "").slice(0, 11);
+  if (!digits) return "";
+  // (XX → 1–2 dígitos
+  if (digits.length <= 2) return digits.replace(/^(\d{1,2})$/, "($1");
+  // (XX) XXXXX → 3–7 dígitos
+  if (digits.length <= 7) return digits.replace(/^(\d{2})(\d{1,5})$/, "($1) $2");
+  // (XX) XXXXX-XXXX → 8–11 dígitos
+  return digits.replace(/^(\d{2})(\d{5})(\d{1,4})$/, "($1) $2-$3");
 }
 import { ArrowUpRight } from "lucide-react";
 import { StepSchema1 } from "@/lib/briefing-schema";

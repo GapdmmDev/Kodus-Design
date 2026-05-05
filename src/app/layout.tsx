@@ -83,9 +83,7 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${mono.variable} ${manrope.variable}`}
     >
       <body>
-        <ThemeProvider>
-          <div className="layout-root">{children}</div>
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
