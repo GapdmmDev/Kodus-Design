@@ -53,9 +53,9 @@ export function Process() {
                     </span>
 
                     <div className="flex flex-col gap-2">
-                      <h4 className="text-[18px] font-medium leading-snug text-[var(--fg)]">
+                      <h3 className="text-[18px] font-medium leading-snug text-[var(--fg)]">
                         {step.title}
-                      </h4>
+                      </h3>
                       <p className="text-[14px] leading-relaxed text-[var(--fg-dim)]">
                         {step.body}
                       </p>

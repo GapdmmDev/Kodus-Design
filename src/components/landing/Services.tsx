@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -43,11 +44,11 @@ export function Services() {
           {/* ── Service list ───────────────────────────────────────── */}
           <div className="border-t border-[var(--line)]">
             {services.items.map((item) => (
-              <a
+              <Link
                 key={item.idx}
-                href="#contato"
-                aria-label={`${item.name}${item.em} — ir para contato`}
-                className="svc-row group relative flex items-center border-b border-[var(--line)] py-9 max-[980px]:py-7 max-[600px]:py-6"
+                href="/formulario"
+                aria-label={`${item.name}${item.em} — começar projeto`}
+                className="svc-row group relative flex items-center border-b border-[var(--line)] py-9 max-[980px]:py-7 max-[600px]:py-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
               >
                 {/* Hover gradient background */}
                 <div
@@ -97,7 +98,7 @@ export function Services() {
                   aria-hidden="true"
                   className="svc-arrow relative shrink-0 text-[var(--accent)]"
                 />
-              </a>
+              </Link>
             ))}
           </div>
         </Reveal>

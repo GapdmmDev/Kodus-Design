@@ -6,7 +6,11 @@
       "Bash(node -e \"const p = require\\('./package.json'\\); const deps = ['next-themes','framer-motion','clsx','tailwind-merge','lucide-react','@radix-ui/react-accordion','class-variance-authority']; deps.forEach\\(d => console.log\\(d, p.dependencies[d] || 'MISSING'\\)\\)\")",
       "Bash(npm run *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(pnpm lint *)",
+      "Bash(pnpm build *)",
+      "PowerShell(pnpm *)",
+      "PowerShell(pnpm build *)"
     ]
   }
 }

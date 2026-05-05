@@ -70,8 +70,10 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
+
+/* clip não cria scroll container — sticky e IntersectionObserver funcionam corretamente no iOS Safari */
+.layout-root { overflow-x: clip; }
 
 ::selection {
   background: var(--accent);
@@ -141,15 +143,27 @@ body {
 /* ──────────────────────────────────────────────────────────────────────────
    Reveal on scroll
    ────────────────────────────────────────────────────────────────────────── */
+/* SSR: elemento visível por padrão (sem JS = sem animação = conteúdo acessível) */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.reveal.in { opacity: 1; transform: none; }
+/* JS adiciona .reveal-js após montar — só então esconde pra animar */
+.reveal.reveal-js {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.reveal.reveal-js.in {
+  opacity: 1;
+  transform: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  .reveal, .reveal.reveal-js, .reveal.reveal-js.in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 

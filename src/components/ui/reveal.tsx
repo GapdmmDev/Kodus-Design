@@ -8,6 +8,26 @@ interface RevealProps {
   delay?: number;
 }
 
+let _observer: IntersectionObserver | null = null;
+
+function getObserver(): IntersectionObserver {
+  if (!_observer) {
+    _observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            _observer?.unobserve(entry.target);
+          }
+        }
+      },
+      // threshold 0.05: qualquer 5% visível já dispara — mais robusto em mobile
+      { threshold: 0.05 }
+    );
+  }
+  return _observer;
+}
+
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -15,18 +35,16 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("in");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.12 }
-    );
+    // Progressive enhancement: só esconde quando JS está rodando
+    el.classList.add("reveal-js");
 
+    const observer = getObserver();
     observer.observe(el);
-    return () => observer.disconnect();
+
+    return () => {
+      observer.unobserve(el);
+      el.classList.remove("reveal-js", "in");
+    };
   }, []);
 
   return (

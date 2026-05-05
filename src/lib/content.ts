@@ -155,7 +155,7 @@ export const nav: NavData = {
     { label: "FAQ", href: "#faq" },
     { label: "Contato", href: "#contato" },
   ],
-  cta: { label: "Começar projeto", href: "#contato" },
+  cta: { label: "Começar projeto", href: "/formulario" },
 };
 
 export const hero: HeroData = {
@@ -174,7 +174,7 @@ export const hero: HeroData = {
   ],
   sub: "Desenvolvemos sites que trabalham enquanto você dorme. Do briefing ao ar em menos de 30 dias.",
   ctas: [
-    { label: "Começar projeto", href: "#contato", variant: "primary" },
+    { label: "Começar projeto", href: "/formulario", variant: "primary" },
     { label: "Ver trabalhos", href: "#trabalhos", variant: "ghost" },
   ],
   trust: "+40 marcas confiaram",
@@ -409,20 +409,20 @@ export const faq: FAQData = {
 };
 
 export const cta: CTAData = {
-  eyebrow: "Próximo passo",
+  eyebrow: "2 vagas disponíveis · Mai/Jun 2026",
   title: [
     { text: "Pronto pra " },
     { text: "vender", italic: true, accent: true },
     { text: " de verdade?" },
   ],
-  copy: "Sem reunião de apresentação. Direto ao briefing, proposta em 5 dias.",
+  copy: "Conta em três etapas rápidas o que você quer construir. Respondemos em até 24h com próximos passos.",
   ctas: [
     {
-      label: "Enviar briefing",
-      href: "mailto:contato@kodus.studio",
+      label: "Começar projeto",
+      href: "/formulario",
       variant: "primary",
     },
-    { label: "Agendar call · 30min", href: "#contato", variant: "ghost" },
+    { label: "Agendar call · 30min", href: "/formulario", variant: "ghost" },
   ],
   info: "Resposta em até 24h · Briefing em até 48h · Proposta em até 5 dias",
 };

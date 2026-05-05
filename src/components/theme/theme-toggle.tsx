@@ -10,20 +10,24 @@ export function ThemeToggle({ className }: { className?: string }) {
 
   useEffect(() => setMounted(true), []);
 
+  const isDark = mounted ? resolvedTheme === "dark" : true; // assume dark (default theme) antes de montar
+
   return (
     <button
       suppressHydrationWarning
       aria-label="Alternar tema"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
         "flex h-10 w-10 items-center justify-center rounded-full",
         "border border-[var(--line)] text-[var(--fg-dim)]",
         "transition-colors duration-200 hover:border-[var(--line-strong)] hover:text-[var(--fg)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
-        className
+        className,
       )}
     >
-      {mounted && (resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />)}
+      {isDark
+        ? <Sun size={16} aria-hidden="true" />
+        : <Moon size={16} aria-hidden="true" />}
     </button>
   );
 }
