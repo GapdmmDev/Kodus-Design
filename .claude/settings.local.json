@@ -10,7 +10,9 @@
       "Bash(pnpm lint *)",
       "Bash(pnpm build *)",
       "PowerShell(pnpm *)",
-      "PowerShell(pnpm build *)"
+      "PowerShell(pnpm build *)",
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+      "Bash(pnpm tsc *)"
     ]
   }
 }

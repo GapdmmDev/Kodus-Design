@@ -96,8 +96,8 @@ export interface WorkCase {
   slug: string;
   name: string;
   tag: string;
-  mockHeading: string;
-  featured?: boolean;
+  caseLabel: string;
+  image: string;
 }
 
 export interface TestimonialData {
@@ -309,35 +309,32 @@ export const process: ProcessStep[] = [
 
 export const work: WorkCase[] = [
   {
-    slug: "orion-capital",
-    name: "Orion Capital",
-    tag: "Fintech · 2026",
-    mockHeading: "Dados claros. Decisão rápida.",
-    featured: true,
+    slug: "arcos-dourados",
+    name: "Arcos Dourados",
+    tag: "Rede de Fast-Food",
+    caseLabel: "Sistema de gestão ágil",
+    image: "/trabalhos/arcos.png",
   },
   {
-    slug: "helix-studio",
-    name: "Helix Studio",
-    tag: "SaaS",
-    mockHeading: "Da ideia ao produto.",
+    slug: "caaotica",
+    name: "Caaotica",
+    tag: "Marca de roupa",
+    caseLabel: "Ecommerce",
+    image: "/trabalhos/caaotica.png",
   },
   {
-    slug: "verde",
-    name: "Verdê",
-    tag: "D2C",
-    mockHeading: "Diretamente a quem importa.",
+    slug: "super-dogao",
+    name: "Super Dogão",
+    tag: "Foodtruck",
+    caseLabel: "Cardápio digital",
+    image: "/trabalhos/superdogao.png",
   },
   {
-    slug: "drumond-atelier",
-    name: "Drumond Atelier",
-    tag: "Arquitetura",
-    mockHeading: "Espaço fala por si.",
-  },
-  {
-    slug: "pulso-logistica",
-    name: "Pulso Logística",
-    tag: "Dashboard",
-    mockHeading: "Operação em tempo real.",
+    slug: "quality-software",
+    name: "Quality Software",
+    tag: "Soluções de TI",
+    caseLabel: "Gestão e validação de ativos de TI",
+    image: "/trabalhos/quality.png",
   },
 ];
 
