@@ -35,20 +35,71 @@ const mono = Geist_Mono({
 
 const BASE_URL = "https://kodus.studio";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      name: "Kodus",
+      alternateName: "Kodus Estúdio Digital",
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/opengraph-image`,
+        width: 1200,
+        height: 630,
+      },
+      sameAs: [
+        "https://www.linkedin.com/company/kodus-studio",
+        "https://www.instagram.com/kodus.studio",
+      ],
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": `${BASE_URL}/#localbusiness`,
+      name: "Kodus",
+      description:
+        "Estúdio digital paulistano. Landing pages, sites institucionais, e-commerce e sistemas sob demanda — focados em conversão.",
+      url: BASE_URL,
+      telephone: "",
+      email: "oi@kodus.studio",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "São Paulo",
+        addressRegion: "SP",
+        addressCountry: "BR",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "Brazil",
+      },
+      serviceType: [
+        "Landing Page",
+        "Site Institucional",
+        "E-commerce",
+        "Desenvolvimento Web",
+      ],
+      priceRange: "$$",
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: { default: "Kodus — Sites que vendem", template: "%s · Kodus" },
+  title: { default: "Kodus · Estúdio Digital — São Paulo", template: "%s · Kodus" },
   description:
     "Estúdio digital paulistano. Landing pages, sites institucionais, e-commerce e sistemas sob demanda — focados em conversão.",
   keywords: [
+    "Kodus",
+    "estúdio digital",
     "landing page",
     "site institucional",
     "e-commerce",
     "desenvolvimento web",
-    "Next.js",
+    "agência digital",
     "São Paulo",
     "conversão",
-    "kodus",
   ],
   authors: [{ name: "Kodus Estúdio Digital", url: BASE_URL }],
   alternates: { canonical: BASE_URL },
@@ -83,6 +134,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${display.variable} ${sans.variable} ${mono.variable} ${manrope.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <ThemeProvider>
           <SmoothScroll>{children}</SmoothScroll>
