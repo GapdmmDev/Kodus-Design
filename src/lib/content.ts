@@ -313,28 +313,28 @@ export const work: WorkCase[] = [
     name: "Arcos Dourados",
     tag: "Rede de Fast-Food",
     caseLabel: "Sistema de gestão ágil",
-    image: "/trabalhos/arcos.png",
+    image: "/trabalhos/arcos.webp",
   },
   {
     slug: "caaotica",
     name: "Caaotica",
     tag: "Marca de roupa",
     caseLabel: "Ecommerce",
-    image: "/trabalhos/caaotica.png",
+    image: "/trabalhos/caaotica.webp",
   },
   {
     slug: "super-dogao",
     name: "Super Dogão",
     tag: "Foodtruck",
     caseLabel: "Cardápio digital",
-    image: "/trabalhos/superdogao.png",
+    image: "/trabalhos/superdogao.webp",
   },
   {
     slug: "quality-software",
     name: "Quality Software",
     tag: "Soluções de TI",
     caseLabel: "Gestão e validação de ativos de TI",
-    image: "/trabalhos/quality.png",
+    image: "/trabalhos/quality.webp",
   },
 ];
 

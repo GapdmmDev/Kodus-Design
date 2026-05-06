@@ -3,10 +3,15 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { Container } from "@/components/ui/container";
 import { LiveDot } from "@/components/ui/live-dot";
 import { Reveal } from "@/components/ui/reveal";
-import { BrowserMockDashboard } from "@/components/landing/BrowserMockDashboard";
+
+const BrowserMockDashboard = dynamic(
+  () => import("@/components/landing/BrowserMockDashboard").then((m) => m.BrowserMockDashboard),
+  { ssr: false }
+);
 import { hero } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import type { TitleSegment } from "@/lib/content";

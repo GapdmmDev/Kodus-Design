@@ -9,8 +9,13 @@ import { work, workSection } from "@/lib/content";
 import type { WorkCase } from "@/lib/content";
 
 const thumbVariants = {
-  rest: { scale: 1, filter: "blur(0px)" },
-  hover: { scale: 1.2, filter: "blur(5px)" },
+  rest: { scale: 1 },
+  hover: { scale: 1.06 },
+};
+
+const overlayVariants = {
+  rest: { opacity: 0 },
+  hover: { opacity: 1 },
 };
 
 const arrowVariants = {
@@ -34,7 +39,7 @@ function WorkCard({ item }: { item: WorkCase }) {
         whileHover="hover"
         animate="rest"
       >
-        {/* Zoom + blur */}
+        {/* Zoom */}
         <motion.div
           className="absolute inset-0"
           variants={thumbVariants}
@@ -45,9 +50,16 @@ function WorkCard({ item }: { item: WorkCase }) {
             alt={item.name}
             fill
             className="object-cover"
-            sizes="(min-width: 980px) 50vw, 100vw"
+            sizes="(min-width: 980px) 45vw, 92vw"
           />
         </motion.div>
+
+        {/* Dark overlay on hover (opacity — composited) */}
+        <motion.div
+          className="absolute inset-0 bg-black/40"
+          variants={overlayVariants}
+          transition={{ duration: 0.3 }}
+        />
 
         {/* Case label — top left */}
         <div className="absolute inset-x-4 top-4">

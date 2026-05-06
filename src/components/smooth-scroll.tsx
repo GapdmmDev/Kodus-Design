@@ -24,11 +24,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const scrollY = useMotionValue(0);
 
   useEffect(() => {
+    // Mobile usa scroll nativo — Lenis não traz ganho e aumenta TBT
+    if (window.matchMedia("(max-width: 979px)").matches) return;
+
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
     });
 
     lenisRef.current = lenis;
