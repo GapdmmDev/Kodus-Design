@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { services } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
@@ -72,7 +73,7 @@ export function Services() {
     >
       <Container>
         {/* ── Section header ─────────────────────────────────────── */}
-        <div className="mb-16 flex items-center justify-between gap-8 max-[980px]:mb-10 max-[980px]:flex-col max-[980px]:items-start">
+        <Reveal className="mb-16 flex items-center justify-between gap-8 max-[980px]:mb-10 max-[980px]:flex-col max-[980px]:items-start">
           <h2
             className="display shrink-0 leading-[.92] tracking-[-0.025em] text-[clamp(40px,6vw,96px)]"
           >
@@ -97,7 +98,7 @@ export function Services() {
           <p className="font-mono max-w-[280px] text-[11px] uppercase tracking-[.06em] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none max-[600px]:hidden">
             {services.meta}
           </p>
-        </div>
+        </Reveal>
 
         {/* ── Service list ───────────────────────────────────────── */}
         <div className="border-t border-[var(--line)]">
@@ -108,6 +109,7 @@ export function Services() {
               className="service-card"
               style={{ zIndex: i + 1 }}
             >
+              <Reveal delay={i * 80}>
               <Link
                 href="/formulario"
                 aria-label={`${item.name}${item.em} — começar projeto`}
@@ -162,6 +164,7 @@ export function Services() {
                   className="svc-arrow relative shrink-0 text-[var(--accent)]"
                 />
               </Link>
+              </Reveal>
             </div>
           ))}
         </div>

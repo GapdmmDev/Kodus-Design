@@ -149,30 +149,8 @@ button,
   .svc-arrow { opacity: 0.5; }
 }
 
-/* ──────────────────────────────────────────────────────────────────────────
-   Reveal on scroll
-   ────────────────────────────────────────────────────────────────────────── */
-/* SSR: elemento visível por padrão (sem JS = sem animação = conteúdo acessível) */
-.reveal {
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-/* JS adiciona .reveal-js após montar — só então esconde pra animar */
-.reveal.reveal-js {
-  opacity: 0;
-  transform: translateY(24px);
-}
-.reveal.reveal-js.in {
-  opacity: 1;
-  transform: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal, .reveal.reveal-js, .reveal.reveal-js.in {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 

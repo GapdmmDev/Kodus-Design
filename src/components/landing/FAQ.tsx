@@ -83,10 +83,9 @@ export function FAQ() {
       className="py-[120px] max-[980px]:py-[80px] max-[600px]:py-16"
     >
       <Container>
-        <Reveal>
           <div className="grid grid-cols-1 gap-12 min-[980px]:grid-cols-[1fr_1.4fr] min-[980px]:gap-20">
             {/* ── Left — eyebrow + heading ────────────────────────────── */}
-            <div className="flex flex-col gap-5">
+            <Reveal className="flex flex-col gap-5">
               <Eyebrow>{faq.eyebrow}</Eyebrow>
 
               <h2
@@ -105,21 +104,21 @@ export function FAQ() {
                   </span>
                 ))}
               </h2>
-            </div>
+            </Reveal>
 
             {/* ── Right — accordion ───────────────────────────────────── */}
             <div className="border-t border-[var(--line)]">
               {faq.items.map((item, i) => (
-                <FAQItem
-                  key={i}
-                  item={item}
-                  isOpen={openIdx === i}
-                  onToggle={() => setOpenIdx(openIdx === i ? null : i)}
-                />
+                <Reveal key={i} delay={i * 80}>
+                  <FAQItem
+                    item={item}
+                    isOpen={openIdx === i}
+                    onToggle={() => setOpenIdx(openIdx === i ? null : i)}
+                  />
+                </Reveal>
               ))}
             </div>
           </div>
-        </Reveal>
       </Container>
     </section>
   );

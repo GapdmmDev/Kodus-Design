@@ -10,8 +10,8 @@ export function Manifesto() {
       className="pb-[120px] max-[980px]:pb-[80px] max-[600px]:pb-16"
     >
       <Container>
-        <Reveal>
           {/* ── Section header ─────────────────────────────────────── */}
+          <Reveal>
           <div className="mb-16 flex items-center justify-between gap-8 max-[980px]:mb-10 max-[980px]:flex-col max-[980px]:items-start">
             <h2 className="display shrink-0 leading-[.92] tracking-[-0.025em] text-[clamp(40px,6vw,96px)]">
               {manifesto.heading.map((seg, i) =>
@@ -29,18 +29,18 @@ export function Manifesto() {
               {manifesto.meta}
             </p>
           </div>
+          </Reveal>
 
           {/* ── 3-column grid ──────────────────────────────────────── */}
           <div className="grid grid-cols-1 min-[980px]:grid-cols-3">
             {manifesto.items.map((item, i) => (
-              <div
+              <Reveal
                 key={item.num}
+                delay={i * 100}
                 className={cn(
                   "flex flex-col gap-4 py-8",
-                  // Desktop horizontal padding + right border divider
                   "min-[980px]:px-10 min-[980px]:first:pl-0 min-[980px]:last:pr-0",
                   i < manifesto.items.length - 1 && "min-[980px]:border-r min-[980px]:border-[var(--line)]",
-                  // Mobile bottom border divider (only between items, not after last)
                   i < manifesto.items.length - 1 && "max-[980px]:border-b max-[980px]:border-[var(--line)]",
                   i > 0 && "max-[980px]:pt-8",
                 )}
@@ -65,10 +65,9 @@ export function Manifesto() {
                 <p className="text-[15px] leading-relaxed text-[var(--fg-dim)]">
                   {item.body}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
-        </Reveal>
       </Container>
     </section>
   );

@@ -80,9 +80,18 @@ function AnimatedCard({
 export function Process() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
+  // useScroll() na window evita o warning de container non-static do Framer Motion.
+  // O progresso é derivado manualmente: 0 quando o topo da section toca o topo do
+  // viewport, 1 quando o fundo da section toca o fundo do viewport.
+  const { scrollY } = useScroll();
+  const scrollYProgress = useTransform(scrollY, (latest) => {
+    const el = sectionRef.current;
+    if (!el) return 0;
+    const sectionTop = el.offsetTop;
+    const sectionHeight = el.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const progress = (latest - sectionTop) / (sectionHeight - viewportHeight);
+    return Math.min(1, Math.max(0, progress));
   });
 
   return (

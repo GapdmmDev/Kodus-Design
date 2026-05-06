@@ -1,11 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { LiveDot } from "@/components/ui/live-dot";
+import { Reveal } from "@/components/ui/reveal";
 import { BrowserMockDashboard } from "@/components/landing/BrowserMockDashboard";
 import { hero } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import type { TitleSegment } from "@/lib/content";
+
+// ── Animation variants ─────────────────────────────────────────────────────
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -37,8 +53,6 @@ function renderSegments(segments: TitleSegment[]) {
 }
 
 // ── Sub-components ─────────────────────────────────────────────────────────
-
-
 
 function TrustBar() {
   const avatarGradients = [
@@ -82,9 +96,7 @@ export function HeroSplit() {
           className={cn(
             "mb-10 flex items-center",
             "font-mono text-[11px] uppercase tracking-[.08em] text-[var(--fg-mute)]",
-            // Desktop: left / center / right
             "min-[980px]:justify-between",
-            // Mobile: vertical stack
             "max-[980px]:flex-col max-[980px]:items-start max-[980px]:gap-2",
           )}
         >
@@ -104,12 +116,12 @@ export function HeroSplit() {
 
         {/* ── Main grid ──────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 items-center gap-12 min-[980px]:grid-cols-[1fr_1.1fr] min-[980px]:gap-[80px]">
-          {/* Left — copy */}
-          <div>
-            <h1
+          {/* Left — copy (stagger container) */}
+          <motion.div variants={container} initial="hidden" animate="show">
+            <motion.h1
+              variants={item}
               className={cn(
                 "display leading-[.92] tracking-[-0.025em]",
-                // Mobile clamp → desktop clamp
                 "text-[clamp(44px,calc((100vw_-_40px)_/_5.5),100px)] min-[980px]:text-[clamp(56px,7vw,108px)]",
               )}
             >
@@ -118,20 +130,27 @@ export function HeroSplit() {
                   {renderSegments(line)}
                 </span>
               ))}
-            </h1>
+            </motion.h1>
 
-            <p className="mt-6 max-w-[400px] text-[16px] leading-relaxed text-[var(--fg-dim)] min-[980px]:text-[17px]">
+            <motion.p
+              variants={item}
+              className="mt-6 max-w-[400px] text-[16px] leading-relaxed text-[var(--fg-dim)] min-[980px]:text-[17px]"
+            >
               {hero.sub}
-            </p>
+            </motion.p>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-wrap gap-3 max-[480px]:flex-col">
+            <motion.div
+              variants={item}
+              className="mt-8 flex flex-wrap gap-3 max-[480px]:flex-col"
+            >
               <Link
                 href={primaryCta.href}
                 className={cn(
                   "group inline-flex items-center justify-center gap-2 rounded-full",
                   "bg-[var(--accent)] px-6 py-3 text-sm font-medium text-white",
                   "transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_30px_-8px_var(--accent)]",
+                  "active:scale-[0.97]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
                   "max-[480px]:w-full",
                 )}
@@ -150,26 +169,32 @@ export function HeroSplit() {
                   "inline-flex items-center justify-center gap-2 rounded-full",
                   "border border-[var(--line-strong)] bg-transparent px-6 py-3 text-sm font-medium text-[var(--fg)]",
                   "transition-colors duration-200 hover:bg-[var(--bg-2)]",
+                  "active:scale-[0.97]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--fg-mute)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
                   "max-[480px]:w-full",
                 )}
               >
                 {ghostCta.label}
               </Link>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* Right — browser mock (desktop only) */}
-          <div className="hidden w-full min-[980px]:block">
+          <Reveal className="hidden w-full min-[980px]:block">
             <BrowserMockDashboard />
-          </div>
+          </Reveal>
         </div>
 
-        {/* Trust bar — below the grid */}
-        <div className="mt-6">
+        {/* Trust bar — below the grid, aligns left col with right on desktop */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mt-6"
+        >
           <TrustBar />
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
