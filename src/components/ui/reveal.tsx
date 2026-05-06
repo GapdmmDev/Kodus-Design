@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 interface RevealProps {
@@ -9,20 +9,46 @@ interface RevealProps {
   delay?: number;
 }
 
+let _observer: IntersectionObserver | null = null;
+
+function getObserver(): IntersectionObserver {
+  if (!_observer) {
+    _observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            _observer?.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+  }
+  return _observer;
+}
+
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.classList.add("reveal-js");
+    getObserver().observe(el);
+    return () => {
+      getObserver().unobserve(el);
+      el.classList.remove("reveal-js", "in");
+    };
+  }, []);
+
   return (
-    <motion.div
-      className={cn(className)}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{
-        duration: 0.7,
-        delay: delay / 1000,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
+    <div
+      ref={ref}
+      className={cn("reveal", className)}
+      style={delay > 0 ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

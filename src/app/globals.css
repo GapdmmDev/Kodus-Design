@@ -149,8 +149,13 @@ button,
   .svc-arrow { opacity: 0.5; }
 }
 
+.reveal { transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.reveal-js { opacity: 0; transform: translateY(20px); }
+.reveal.reveal-js.in { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .reveal, .reveal.reveal-js, .reveal.reveal-js.in { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 

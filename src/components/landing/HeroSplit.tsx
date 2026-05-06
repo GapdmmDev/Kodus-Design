@@ -23,6 +23,12 @@ const container = {
   show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
 
+// h1 não anima opacity — browser mede LCP na primeira pintura
+const titleItem = {
+  hidden: { y: 16 },
+  show: { y: 0, transition: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] } },
+};
+
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] } },
@@ -124,7 +130,7 @@ export function HeroSplit() {
           {/* Left — copy (stagger container) */}
           <motion.div variants={container} initial="hidden" animate="show">
             <motion.h1
-              variants={item}
+              variants={titleItem}
               className={cn(
                 "display leading-[.92] tracking-[-0.025em]",
                 "text-[clamp(44px,calc((100vw_-_40px)_/_5.5),100px)] min-[980px]:text-[clamp(56px,7vw,108px)]",
