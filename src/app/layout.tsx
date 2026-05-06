@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -83,7 +84,9 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${mono.variable} ${manrope.variable}`}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

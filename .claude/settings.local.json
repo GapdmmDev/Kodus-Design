@@ -12,7 +12,10 @@
       "PowerShell(pnpm *)",
       "PowerShell(pnpm build *)",
       "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
-      "Bash(pnpm tsc *)"
+      "Bash(pnpm tsc *)",
+      "PowerShell(pnpm add)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Get-ChildItem *)"
     ]
   }
 }

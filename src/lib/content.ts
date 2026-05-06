@@ -360,8 +360,8 @@ export const testimonial: TestimonialData = {
     },
   ],
   author: {
-    name: "Rafael Mendes",
-    role: "CEO · Orion Capital",
+    name: "Caroline Heitzman",
+    role: "CEO · Caaotica",
   },
   stats: [
     { value: "+312%", label: "conversão" },
