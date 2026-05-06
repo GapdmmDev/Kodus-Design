@@ -25,9 +25,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.1,           // interpolação linear por frame — mais responsivo que duration
+      lerp: 0.1,
       smoothWheel: true,
-      smoothTouch: false,
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });
