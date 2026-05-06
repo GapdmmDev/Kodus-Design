@@ -25,7 +25,7 @@ export function Manifesto() {
               )}
             </h2>
 
-            <p className="font-mono max-w-[280px] text-[11px] uppercase tracking-[.06em] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none">
+            <p className="font-mono max-w-[280px] text-[11px] uppercase tracking-[.06em] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none max-[600px]:hidden">
               {manifesto.meta}
             </p>
           </div>
@@ -45,11 +45,6 @@ export function Manifesto() {
                   i > 0 && "max-[980px]:pt-8",
                 )}
               >
-                {/* Number */}
-                <span className="font-mono text-[11px] uppercase tracking-[.08em] text-[var(--fg-mute)]">
-                  {item.num}
-                </span>
-
                 {/* Title — italic, accent on first word */}
                 <h3
                   className="display italic leading-tight"

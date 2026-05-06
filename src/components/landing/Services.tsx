@@ -94,7 +94,7 @@ export function Services() {
             ))}
           </h2>
 
-          <p className="font-mono max-w-[280px] text-[11px] uppercase tracking-[.06em] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none">
+          <p className="font-mono max-w-[280px] text-[11px] uppercase tracking-[.06em] leading-relaxed text-[var(--fg-dim)] max-[980px]:max-w-none max-[600px]:hidden">
             {services.meta}
           </p>
         </div>

@@ -168,7 +168,7 @@ export function Process() {
               </h2>
 
               <div
-                className={cn("grid", "max-[980px]:grid-cols-2", "max-[600px]:grid-cols-1")}
+                className={cn("grid", "max-[980px]:grid-cols-2", "max-[600px]:grid-cols-1", "max-[600px]:-mx-5")}
                 style={{ background: "var(--line)" }}
               >
                 {process.map((step) => (
