@@ -1,12 +1,78 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
 import { faq } from "@/lib/content";
 import { cn } from "@/lib/cn";
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+// ── FAQItem — mede altura em px para evitar reflow do height:"auto" ────────
+
+function FAQItem({
+  item,
+  isOpen,
+  onToggle,
+}: {
+  item: { q: string; a: string };
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  // Mede a altura natural do conteúdo uma vez após o mount
+  useEffect(() => {
+    if (bodyRef.current) setHeight(bodyRef.current.offsetHeight);
+  }, []);
+
+  return (
+    <div className="border-b border-[var(--line)]">
+      <button
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className={cn(
+          "group flex min-h-[56px] w-full items-center justify-between gap-4 py-5 text-left",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
+        )}
+      >
+        <span className="display italic text-[clamp(18px,2vw,24px)] leading-snug text-[var(--fg)]">
+          {item.q}
+        </span>
+        <span
+          className={cn(
+            "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--accent)]",
+            "transition-transform duration-300",
+            isOpen && "rotate-45",
+          )}
+          aria-hidden="true"
+        >
+          <Plus size={18} />
+        </span>
+      </button>
+
+      {/* Anima para px, não "auto" — sem reflow de medição durante a transição */}
+      <motion.div
+        initial={false}
+        animate={{ height: isOpen ? height : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.28, ease: EASE }}
+        style={{ overflow: "hidden" }}
+      >
+        <div ref={bodyRef}>
+          <p className="pb-6 text-[15px] leading-relaxed text-[var(--fg-dim)]">
+            {item.a}
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+// ── Section ────────────────────────────────────────────────────────────────
 
 export function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
@@ -43,53 +109,14 @@ export function FAQ() {
 
             {/* ── Right — accordion ───────────────────────────────────── */}
             <div className="border-t border-[var(--line)]">
-              {faq.items.map((item, i) => {
-                const isOpen = openIdx === i;
-                return (
-                  <div key={i} className="border-b border-[var(--line)]">
-                    <button
-                      onClick={() => setOpenIdx(isOpen ? null : i)}
-                      aria-expanded={isOpen}
-                      className={cn(
-                        "group flex min-h-[56px] w-full items-center justify-between gap-4 py-5 text-left",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
-                      )}
-                    >
-                      <span className="display italic text-[clamp(18px,2vw,24px)] leading-snug text-[var(--fg)]">
-                        {item.q}
-                      </span>
-
-                      <span
-                        className={cn(
-                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--accent)]",
-                          "transition-transform duration-300",
-                          isOpen && "rotate-45",
-                        )}
-                        aria-hidden="true"
-                      >
-                        <Plus size={18} />
-                      </span>
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                          style={{ overflow: "hidden" }}
-                        >
-                          <p className="pb-6 text-[15px] leading-relaxed text-[var(--fg-dim)]">
-                            {item.a}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
+              {faq.items.map((item, i) => (
+                <FAQItem
+                  key={i}
+                  item={item}
+                  isOpen={openIdx === i}
+                  onToggle={() => setOpenIdx(openIdx === i ? null : i)}
+                />
+              ))}
             </div>
           </div>
         </Reveal>

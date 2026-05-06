@@ -201,6 +201,13 @@ button,
   to { height: 0; opacity: 0; }
 }
 
+.faq-content[data-state="open"] {
+  animation: accordion-down 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-content[data-state="closed"] {
+  animation: accordion-up 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 
 /* ──────────────────────────────────────────────────────────────────────────
    Pulse (live indicator)
