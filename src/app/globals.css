@@ -214,3 +214,50 @@ button,
    ────────────────────────────────────────────────────────────────────────── */
 .safe-top { padding-top: env(safe-area-inset-top); }
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Stacking services cards
+   ────────────────────────────────────────────────────────────────────────── */
+.services-section {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.services-section.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card {
+  position: sticky;
+  top: 80px;
+  background: var(--bg); /* cobre o row abaixo ao empilhar */
+  will-change: transform;
+  transition: transform 0.12s ease-out;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.service-idx {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff9a6c 60%, var(--accent) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .service-card { transition: none; }
+  .service-idx { animation: none; }
+}
