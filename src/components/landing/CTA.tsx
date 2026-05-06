@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { LiveDot } from "@/components/ui/live-dot";
 import { cta } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import type { TitleSegment } from "@/lib/content";
@@ -63,11 +64,7 @@ export function CTA() {
           <div className="relative flex flex-col items-center text-center">
             {/* Eyebrow — manual render to use green dot instead of CSS ::before orange dot */}
             <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.08em] text-[var(--fg-mute)]">
-              <span
-                className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"
-                style={{ animation: "pulse 2s ease-in-out infinite" }}
-                aria-hidden="true"
-              />
+              <LiveDot />
               {cta.eyebrow}
             </span>
 

@@ -7,7 +7,7 @@ export function Manifesto() {
   return (
     <section
       id="manifesto"
-      className="py-[120px] max-[980px]:py-[80px] max-[600px]:py-16"
+      className="pb-[120px] max-[980px]:pb-[80px] max-[600px]:pb-16"
     >
       <Container>
         <Reveal>

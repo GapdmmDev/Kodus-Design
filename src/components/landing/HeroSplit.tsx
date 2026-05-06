@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { LiveDot } from "@/components/ui/live-dot";
 import { hero } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import type { TitleSegment } from "@/lib/content";
@@ -36,15 +37,6 @@ function renderSegments(segments: TitleSegment[]) {
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
-function LiveDot() {
-  return (
-    <span
-      className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"
-      style={{ animation: "pulse 2s ease-in-out infinite" }}
-      aria-hidden="true"
-    />
-  );
-}
 
 function BrowserMock() {
   return (
