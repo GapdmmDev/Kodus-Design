@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { LiveDot } from "@/components/ui/live-dot";
+import { BrowserMockDashboard } from "@/components/landing/BrowserMockDashboard";
 import { hero } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import type { TitleSegment } from "@/lib/content";
@@ -38,61 +39,6 @@ function renderSegments(segments: TitleSegment[]) {
 // ── Sub-components ─────────────────────────────────────────────────────────
 
 
-function BrowserMock() {
-  return (
-    <div
-      className="overflow-hidden rounded-[14px] border border-[var(--line-strong)]"
-      style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,.5)" }}
-      aria-hidden="true"
-    >
-      {/* Window chrome */}
-      <div className="flex items-center gap-3 border-b border-[var(--line)] bg-[var(--bg-2)] px-4 py-3">
-        <div className="flex gap-1.5">
-          <div className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-          <div className="h-3 w-3 rounded-full bg-[#febc2e]" />
-          <div className="h-3 w-3 rounded-full bg-[#28c840]" />
-        </div>
-        <div className="flex h-6 flex-1 items-center rounded bg-[var(--bg)] px-3">
-          <span className="truncate font-mono text-[10px] text-[var(--fg-mute)]">
-            {hero.browserMock.url}
-          </span>
-        </div>
-      </div>
-
-      {/* Body */}
-      <div
-        className="relative aspect-[16/10] overflow-hidden"
-        style={{
-          background:
-            "repeating-linear-gradient(45deg, var(--card) 0px, var(--card) 10px, var(--card-2) 10px, var(--card-2) 20px)",
-        }}
-      >
-        {/* Fade overlay so content reads clearly */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--card)]/80 via-transparent to-transparent" />
-
-        <div className="absolute inset-0 flex flex-col justify-center p-8 max-[600px]:p-5">
-          <p
-            className="display italic leading-tight text-[var(--fg)]"
-            style={{ fontSize: "clamp(18px, 3vw, 30px)" }}
-          >
-            {hero.browserMock.heading}
-          </p>
-          <div className="mt-5">
-            <span
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)]",
-                "px-4 py-2 font-mono text-[10px] uppercase tracking-[.06em] text-white",
-              )}
-            >
-              {hero.browserMock.cta}
-              <ArrowUpRight size={10} />
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function TrustBar() {
   const avatarGradients = [
@@ -212,16 +158,17 @@ export function HeroSplit() {
               </Link>
             </div>
 
-            {/* Trust bar */}
-            <div className="mt-8">
-              <TrustBar />
-            </div>
           </div>
 
-          {/* Right — browser mock */}
-          <div className="w-full">
-            <BrowserMock />
+          {/* Right — browser mock (desktop only) */}
+          <div className="hidden w-full min-[980px]:block">
+            <BrowserMockDashboard />
           </div>
+        </div>
+
+        {/* Trust bar — below the grid */}
+        <div className="mt-6">
+          <TrustBar />
         </div>
       </Container>
     </section>

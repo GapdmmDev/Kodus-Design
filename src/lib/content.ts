@@ -184,7 +184,7 @@ export const hero: HeroData = {
     { value: "98/100", label: "PageSpeed médio" },
   ],
   browserMock: {
-    url: "kodus.studio/cases/orion",
+    url: "kodusdesign.com/cases",
     heading: "Velocidade é uma escolha.",
     cta: "Iniciar",
   },
