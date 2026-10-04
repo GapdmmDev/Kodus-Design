@@ -70,6 +70,8 @@ export interface ServicesData {
   /** Array of lines; each line is an array of segments */
   heading: TitleSegment[][];
   meta: string;
+  /** Rendered after the price on every row, e.g. "até 12x" */
+  installments: string;
   items: ServiceItem[];
 }
 
@@ -201,14 +203,15 @@ export const services: ServicesData = {
       { text: "mensurável.", italic: true, accent: true },
     ],
   ],
-  meta: "Cada entrega inclui design, código e analytics prontos pra uso.",
+  meta: "Cada entrega inclui design, código e analytics prontos pra uso. Parcelamento em até 12x.",
+  installments: "até 12x",
   items: [
     {
       idx: "01",
       name: "Landing pages",
       em: "/conversão",
-      desc: "Uma página, um objetivo, uma ação. Sem distração que escape o lead.",
-      price: "A partir de R$ 4,5k",
+      desc: "Uma página, um objetivo, uma ação. Zero distração pra ninguém escapar.",
+      price: "A partir de R$ 2,9k",
       time: "7–14 dias",
     },
     {
@@ -216,7 +219,7 @@ export const services: ServicesData = {
       name: "Site institucional",
       em: "/marca",
       desc: "Presença digital que transmite credibilidade antes de qualquer reunião.",
-      price: "A partir de R$ 8k",
+      price: "A partir de R$ 5,5k",
       time: "21–28 dias",
     },
     {
@@ -224,7 +227,7 @@ export const services: ServicesData = {
       name: "E-commerce",
       em: "/vendas",
       desc: "Loja com checkout otimizado para converter, não para impressionar.",
-      price: "A partir de R$ 18k",
+      price: "A partir de R$ 12k",
       time: "30–60 dias",
     },
     {
@@ -232,7 +235,7 @@ export const services: ServicesData = {
       name: "Portfólio criativo",
       em: "/autor",
       desc: "Seus trabalhos apresentados com o cuidado que merecem.",
-      price: "A partir de R$ 6k",
+      price: "A partir de R$ 3,5k",
       time: "14–21 dias",
     },
     {
@@ -240,7 +243,7 @@ export const services: ServicesData = {
       name: "Sistemas sob demanda",
       em: "/produto",
       desc: "Do briefing ao deploy. Produto digital sob medida, sem gambiarras.",
-      price: "A partir de R$ 25k",
+      price: "A partir de R$ 20k",
       time: "60+ dias",
     },
   ],
@@ -384,7 +387,7 @@ export const faq: FAQData = {
     },
     {
       q: "Como funciona o pagamento?",
-      a: "50% na assinatura do contrato, 50% na entrega final. Sem surpresa. Projetos acima de R$ 10k aceitam divisão em mais etapas.",
+      a: "50% na assinatura do contrato, 50% na entrega final — ou parcelado em até 12x no cartão. Sem surpresa: o valor fechado no contrato é o valor final.",
     },
     {
       q: "Preciso ter o conteúdo pronto antes de começar?",

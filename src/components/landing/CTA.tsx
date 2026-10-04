@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { LiveDot } from "@/components/ui/live-dot";
@@ -85,19 +84,14 @@ export function CTA() {
               <Link
                 href={primaryCta.href}
                 className={cn(
-                  "group inline-flex items-center justify-center gap-2 rounded-full",
+                  "inline-flex items-center justify-center rounded-full",
                   "bg-[var(--accent)] px-7 py-3.5 text-sm font-medium text-white",
-                  "transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_30px_-8px_var(--accent)]",
+                  "transition-colors duration-200 hover:bg-[#e04e18]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
                   "max-[480px]:w-full",
                 )}
               >
                 {primaryCta.label}
-                <ArrowUpRight
-                  size={14}
-                  className="shrink-0 transition-transform duration-150 group-hover:translate-x-px group-hover:-translate-y-px"
-                  aria-hidden="true"
-                />
               </Link>
 
               <Link

@@ -3,10 +3,20 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { services } from "@/lib/content";
 import { cn } from "@/lib/cn";
+
+const MotionLink = motion.create(Link);
+
+const arrowVariants = {
+  rest: { x: 16, opacity: 0 },
+  hover: { x: 0, opacity: 1 },
+};
+
+const ease = [0.25, 0.1, 0.25, 1] as const;
 
 const CARD_TOP = 80;
 const MAX_SCALE_LOSS = 0.06;
@@ -110,9 +120,11 @@ export function Services() {
               style={{ zIndex: i + 1 }}
             >
               <Reveal delay={i * 80}>
-              <Link
+              <MotionLink
                 href="/formulario"
                 aria-label={`${item.name}${item.em} — começar projeto`}
+                initial="rest"
+                whileHover="hover"
                 className={cn(
                   "svc-row group relative flex items-center py-9 max-[980px]:py-7 max-[600px]:py-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
                   i === services.items.length - 1 && "border-b border-[var(--line)]",
@@ -142,28 +154,45 @@ export function Services() {
                     {item.idx}
                   </span>
 
-                  {/* Name */}
-                  <span
-                    className={cn(
-                      "display leading-none tracking-[-0.02em]",
-                      "text-[clamp(28px,8vw,42px)] min-[980px]:text-[clamp(36px,5vw,68px)]",
-                      "min-[980px]:whitespace-nowrap",
-                    )}
-                  >
-                    {item.name}{" "}
-                    <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
-                      {item.em}
-                    </em>
-                  </span>
+                  {/* Name + desc + price */}
+                  <div className="flex flex-col gap-3 max-[600px]:gap-2">
+                    <span
+                      className={cn(
+                        "display leading-none tracking-[-0.02em]",
+                        "text-[clamp(28px,8vw,42px)] min-[980px]:text-[clamp(36px,5vw,68px)]",
+                        "min-[980px]:whitespace-nowrap",
+                      )}
+                    >
+                      {item.name}{" "}
+                      <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+                        {item.em}
+                      </em>
+                    </span>
+
+                    <span className="max-w-[440px] text-[14px] leading-relaxed text-[var(--fg-dim)] max-[600px]:text-[13px]">
+                      {item.desc}
+                    </span>
+
+                    <span className="font-mono text-[11px] uppercase tracking-[.06em] text-[var(--fg-mute)]">
+                      <span className="text-[var(--fg)]">{item.price}</span>
+                      {" · "}
+                      {services.installments}
+                      {" · "}
+                      {item.time}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Arrow */}
-                <ArrowUpRight
-                  size={28}
+                {/* Arrow — slides in from right on hover */}
+                <motion.span
                   aria-hidden="true"
-                  className="svc-arrow relative shrink-0 text-[var(--accent)]"
-                />
-              </Link>
+                  variants={arrowVariants}
+                  transition={{ duration: 0.28, ease }}
+                  className="relative shrink-0 text-[var(--accent)]"
+                >
+                  <ArrowUpRight strokeWidth={0.5} className="w-[72px] h-[72px] max-[600px]:w-7 max-[600px]:h-7" />
+                </motion.span>
+              </MotionLink>
               </Reveal>
             </div>
           ))}

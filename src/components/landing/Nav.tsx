@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -80,19 +80,14 @@ export function Nav() {
                 href={nav.cta.href}
                 aria-label={nav.cta.label}
                 className={cn(
-                  "group flex h-10 min-w-10 items-center justify-center gap-1.5 rounded-full px-4",
+                  "flex h-10 items-center justify-center rounded-full px-4",
                   "bg-[var(--fg)] text-sm font-medium text-[var(--bg)]",
                   "transition-colors duration-200 hover:bg-[var(--accent)] hover:text-white",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
                   "max-[480px]:px-2.5",
                 )}
               >
-                <span className="hidden min-[480px]:inline" aria-hidden="true">{nav.cta.label}</span>
-                <ArrowUpRight
-                  size={14}
-                  className="shrink-0 transition-transform duration-150 group-hover:translate-x-px group-hover:-translate-y-px"
-                  aria-hidden="true"
-                />
+                <span className="hidden min-[480px]:inline">{nav.cta.label}</span>
               </Link>
 
               {/* Hamburger — visible below 980px */}
@@ -179,18 +174,13 @@ export function Nav() {
                 href={nav.cta.href}
                 onClick={close}
                 className={cn(
-                  "group inline-flex h-12 items-center gap-2 rounded-full px-6",
+                  "inline-flex h-12 items-center rounded-full px-6",
                   "bg-[var(--accent)] text-sm font-medium text-white",
-                  "transition-colors duration-200 hover:opacity-90",
+                  "transition-colors duration-200 hover:bg-[#e04e18]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]",
                 )}
               >
                 {nav.cta.label}
-                <ArrowUpRight
-                  size={14}
-                  className="shrink-0 transition-transform duration-150 group-hover:translate-x-px group-hover:-translate-y-px"
-                  aria-hidden="true"
-                />
               </Link>
             </div>
           </motion.div>

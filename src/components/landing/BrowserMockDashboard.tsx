@@ -93,10 +93,16 @@ export function BrowserMockDashboard() {
               <motion.div
                 key={i}
                 className="flex-1 rounded-sm"
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                transition={{ duration: 0.35, delay: i * 0.1, ease: "easeOut" }}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{
+                  duration: 0.7,
+                  delay: i * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
                 style={{
+                  height: `${h}%`,
+                  transformOrigin: "bottom",
                   background:
                     i === barData.length - 1
                       ? "var(--accent)"

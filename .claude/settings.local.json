@@ -15,7 +15,10 @@
       "Bash(pnpm tsc *)",
       "PowerShell(pnpm add)",
       "PowerShell(Get-Command *)",
-      "PowerShell(Get-ChildItem *)"
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(pnpm lint)",
+      "PowerShell(npx pnpm lint)",
+      "PowerShell(npx eslint src)"
     ]
   }
 }
